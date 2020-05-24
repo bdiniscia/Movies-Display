@@ -6,7 +6,7 @@ import CarouselMovies from './Widgets/CarouselMovies'
 const Home = () => {
     return (
         <div>
-            <CarouselMovies />
+            <CarouselMovies/>
         </div>
     )
 }

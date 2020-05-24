@@ -4,3 +4,9 @@ export const displayAction = (media) => {
         payload: media
     }
 }
+
+export const flagAction = () => {
+    return {
+        type: 'IS_MEDIA',
+    }
+}
