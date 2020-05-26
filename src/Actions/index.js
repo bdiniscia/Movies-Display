@@ -10,3 +10,16 @@ export const flagAction = () => {
         type: 'IS_MEDIA',
     }
 }
+
+export const selectedAction = (media) => {
+    return {
+        type: 'MEDIA_SELECTED',
+        payload: media
+    }
+}
+
+export const flagSelectedAction = () => {
+    return {
+        type: 'IS_SELECTED',
+    }
+}

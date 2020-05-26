@@ -1,9 +1,18 @@
 import Loader from 'react-loader-spinner';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 import React, { useState } from 'react';
 import './App.sass';
-import Home from './Components/Home';
+import CarouselMedia from './Components/CarouselMedia';
+import Navbar from './Components/Navbar'
+import Footer from './Components/Footer'
+import MediaDetails from './Components/MediaDetails'
 import { displayAction, flagAction } from './Actions/index'
 
 
@@ -15,25 +24,6 @@ const App = () => {
   // A proxy to bypass de CORS problem
   const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
   const targetUrl = 'https://mychannel.nunchee.tv/api/generic/playlists/details/5b845b8346cc29000e4f186a?itemsPerPage=10'
-
-  // const getMedia = () => {
-  //   setIsLoading(true);
-  //   fetch(proxyUrl + targetUrl)
-  //     .then( data => data.json())
-  //     .then( data => {
-  //       setIsLoading(false)
-  //       console.log('>> items: ', data.data.items)
-  //       let arrayToDispatch = [];
-  //       data.data.items.forEach(item => {
-  //           arrayToDispatch.push(arrangeMedia(item))
-  //       })
-  //       console.log('>> arrayToDispatch:', arrayToDispatch);
-  //       return arrayToDispatch 
-  //     })
-  //     .then(array => dispatch(displayAction(array)))
-  //     .then(() => dispatch(flagAction()))
-  //     .catch(error => console.log(`> catch:`, error))
-  // }
 
   const arrangeMedia = (data) => {
     let info = {};
@@ -57,7 +47,6 @@ const App = () => {
       fetch(proxyUrl + targetUrl)
         .then( data => data.json())
         .then( data => {
-          setIsLoading(false)
           console.log('>> items: ', data.data.items)
           let arrayToDispatch = [];
           data.data.items.forEach(item => {
@@ -67,7 +56,9 @@ const App = () => {
           return arrayToDispatch 
         })
         .then(array => dispatch(displayAction(array)))
-        .then(() => dispatch(flagAction()))
+        .then(() => {
+          dispatch(flagAction())
+          setIsLoading(false)})
         .catch(error => console.log(`> catch:`, error))
     }
     getMedia()
@@ -84,7 +75,14 @@ const App = () => {
         width={100}
         visible={isLoading} 
       />
-        <Home />
+      <Navbar />
+      <Router>
+          <Switch>
+            <Route exact path="/Contenidos" component={CarouselMedia} />
+            <Route path="/Contenidos/detalle/:id" component={MediaDetails} />
+          </Switch>
+      </Router>    
+      <Footer />
     </div>
   );
 }

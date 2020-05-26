@@ -1,16 +1,23 @@
-import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
-import { useSelector } from 'react-redux'
-import './CarouselMovies.sass'
+import { useSelector, useDispatch } from 'react-redux'
 
-const CarouselMovies = () => {
+import React from 'react'
+import './CarouselMedia.sass'
+import Button from './Widgets/Button'
+import { selectedAction } from '../Actions/index'
+
+const CarouselMedia = () => {
 
     const media = useSelector(state => state.MediaAvailable);
     const flag = useSelector(state => state.isMedia)
+    const dispatch = useDispatch()
+
     console.log('en Carousel: ', media)
 
+
+
     return (
-        <div>
+        <div className='divCarousel'>
              <Carousel>
                 { flag &&
                 media.map(serie => {
@@ -21,9 +28,9 @@ const CarouselMovies = () => {
                             src={`https://mychannel.nunchee.tv/api/assets/images/view/${serie.imgBackdrop[0]._id}?type=backdrop`}
                             alt="First slide"
                         />
-                        <Carousel.Caption>
-                            <h3 className='captionCarousel'>{serie.title}</h3>
-                            <p className='descriptionCarousel'>{serie.description}</p>
+                        <Carousel.Caption className='captionCarousel'>
+                            <h3 className='titleCarousel'>{serie.title}</h3>
+                            <Button route={`/Contenidos/detalle/${serie.id}`} title='Ver más detalles'/>
                         </Carousel.Caption>
                     </Carousel.Item>
                     )
@@ -33,6 +40,6 @@ const CarouselMovies = () => {
     )
 }
 
-export default CarouselMovies
+export default CarouselMedia
 
 
