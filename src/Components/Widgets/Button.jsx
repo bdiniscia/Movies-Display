@@ -7,7 +7,7 @@ import './Button.sass'
 
 const Button = ({title, route, onClick}) => {
     return (
-        <Link to={route}>
+        <Link to={route}  style={{textDecoration: 'none', color: '#fff' }}>
             <div 
             className = 'button'
             onClick = {onClick}>
