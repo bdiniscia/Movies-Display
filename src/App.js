@@ -12,6 +12,7 @@ import Home from './Components/Home'
 import Footer from './Components/Footer'
 import MediaDetails from './Components/MediaDetails'
 import Contadores from './Components/Contadores'
+import Theory from "./Components/Theory";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route path="/Contenidos/detalle/:id" component={MediaDetails} />
             <Route path="/Contadores" component={Contadores} />
+            <Route path="/Teoria" component={Theory} />
           </Switch>
       </Router>    
       <Footer />
