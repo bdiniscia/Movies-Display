@@ -12,7 +12,7 @@ import Home from './Components/Home'
 import Footer from './Components/Footer'
 import MediaDetails from './Components/MediaDetails'
 import Contadores from './Components/Contadores'
-import Theory from "./Components/Theory";
+import Theory from './Components/Theory'
 
 
 const App = () => {
